@@ -2,7 +2,7 @@
 from airtest.utils.resolution import cocos_min_strategy
 import os
 import cv2
-from distutils.version import LooseVersion
+from packaging.version import parse as LooseVersion
 
 
 class Settings(object):
