@@ -54,6 +54,7 @@ setup(
     long_description='UI Test Automation Framework for Games and Apps on Android/iOS/Windows, present by NetEase Games',
     url='https://github.com/AirtestProject/Airtest',
     license='Apache License 2.0',
+    python_requires='>=3.11, <3.14',
     keywords=['automation', 'automated-test', 'game', 'android', 'ios', 'windows', 'linux'],
     packages=find_packages(exclude=['cover', 'playground', 'tests', 'dist']),
     package_data={
@@ -78,12 +79,8 @@ setup(
     airtest = airtest.cli.__main__:main
     """,
     classifiers=[
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
     ],
 )

@@ -8,11 +8,8 @@ def get_airtest_version():
     pip_pkg_dir = os.path.join(os.path.dirname(__file__), "..", "..")
     pip_pkg_dir = os.path.abspath(pip_pkg_dir)
 
-    return (
-        'airtest {} from {} (python {})'.format(
-            __version__, pip_pkg_dir, sys.version[:3],
-        )
-    )
+    # 使用sys.version_info.major和minor确保显示完整版本号（如3.13）
+    return f'airtest {__version__} from {pip_pkg_dir} (python {sys.version_info.major}.{sys.version_info.minor})'
 
 
 def show_version():
