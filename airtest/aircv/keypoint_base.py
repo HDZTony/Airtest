@@ -94,7 +94,7 @@ class KeypointMatching(object):
         # first you have to do the matching
         self.find_best_result()
         # then initialize the result image:
-        matching_info_img = np.zeros([max(h_sch, h_src), w_sch + w_src, 3], np.uint8)
+        matching_info_img = np.zeros([max(h_sch, h_src), w_sch + w_src, 3], dtype=np.uint8)
         matching_info_img[:h_sch, :w_sch, :] = self.im_search
         matching_info_img[:h_src, w_sch:, :] = self.im_source
         # render the match image at last:

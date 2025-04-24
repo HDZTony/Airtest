@@ -63,11 +63,11 @@ def img_mat_rgb_2_gray(img_mat):
 
 def img_2_string(img):
     _, png = cv2.imencode('.png', img)
-    return png.tostring()
+    return png.tobytes()
 
 
 def string_2_img(pngstr):
-    nparr = np.frombuffer(pngstr, np.uint8)
+    nparr = np.frombuffer(pngstr, dtype=np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     return img
 

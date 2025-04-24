@@ -60,7 +60,8 @@ def rotate(img, angle=90, clockwise=True):
     def count_clock_rotate(img):
         # 逆时针旋转90°
         rows, cols = img.shape[:2]
-        rotate_img = np.zeros((cols, rows))
+        # 使用与原图相同的数据类型创建零数组
+        rotate_img = np.zeros((cols, rows), dtype=img.dtype)
         rotate_img = cv2.transpose(img)
         rotate_img = cv2.flip(rotate_img, 0)
         return rotate_img
