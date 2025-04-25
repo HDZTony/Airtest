@@ -78,19 +78,22 @@ def find_all_sift(im_source, im_search, threshold=0.8, rgb=True, good_ratio=FILT
 
 
 def _init_sift():
-    """Make sure that there is SIFT module in OpenCV."""
-    if cv2.__version__.startswith("3."):
-        # OpenCV3.x, sift is in contrib module, you need to compile it seperately.
+    """创建 SIFT 特征检测器"""
+    try:
+        # 直接使用 OpenCV 4.5+ 或 3.4.12+ 中的主仓库版本
+        return cv2.SIFT_create(edgeThreshold=10)
+    except AttributeError:
+        # 如果失败，尝试 contrib 模块 (OpenCV 3.x/4.x 早期版本)
         try:
-            sift = cv2.xfeatures2d.SIFT_create(edgeThreshold=10)
-        except:
-            print("to use SIFT, you should build contrib with opencv3.0")
-            raise NoSIFTModuleError("There is no SIFT module in your OpenCV environment !")
-    else:
-        # OpenCV2.x, just use it.
-        sift = cv2.SIFT(edgeThreshold=10)
-
-    return sift
+            return cv2.xfeatures2d.SIFT_create(edgeThreshold=10)
+        except Exception as e:
+            # 如果仍然失败，尝试 OpenCV 2.x 版本
+            try:
+                return cv2.SIFT(edgeThreshold=10)  # type: ignore
+            except Exception as e2:
+                print(f"SIFT 初始化错误: {str(e)}")
+                print("无法创建 SIFT 检测器，请确保安装了正确的 OpenCV 版本")
+                raise NoModuleError("There is no SIFT module in your OpenCV environment!")
 
 
 def _get_key_points(im_source, im_search, good_ratio):

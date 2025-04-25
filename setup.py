@@ -6,7 +6,8 @@ from setuptools import setup, find_packages
 
 def read(rel_path):
     here = os.path.abspath(os.path.dirname(__file__))
-    with codecs.open(os.path.join(here, rel_path), 'r') as fp:
+    # 指定以UTF-8编码读取文件，支持非ASCII字符
+    with codecs.open(os.path.join(here, rel_path), 'r', encoding='utf-8') as fp:
         return fp.read()
 
 

@@ -25,11 +25,13 @@ class TestAircv(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.keypoint_sch = imread("matching_images/keypoint_search.png")
-        cls.keypoint_src = imread("matching_images/keypoint_screen.png")
+        import os
+        base_dir = os.path.dirname(__file__)
+        cls.keypoint_sch = imread(os.path.join(base_dir, "matching_images", "keypoint_search.png"))
+        cls.keypoint_src = imread(os.path.join(base_dir, "matching_images", "keypoint_screen.png"))
 
-        cls.template_sch = imread("matching_images/template_search.png")
-        cls.template_src = imread("matching_images/template_screen.png")
+        cls.template_sch = imread(os.path.join(base_dir, "matching_images", "template_search.png"))
+        cls.template_src = imread(os.path.join(base_dir, "matching_images", "template_screen.png"))
 
     @classmethod
     def tearDownClass(cls):
@@ -75,6 +77,7 @@ class TestAircv(unittest.TestCase):
         result = SIFTMatching(self.keypoint_sch, self.keypoint_src, threshold=self.THRESHOLD, rgb=self.RGB).find_best_result()
         self.assertIsInstance(result, dict)
 
+    @unittest.skip("SURF 需要特殊编译的 OpenCV，启用 nonfree 模块，跳过测试")
     def test_contrib_find_surf(self):
         """SURF matching (----need OpenCV contrib module----)."""
         # 快,效果不错
